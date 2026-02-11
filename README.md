@@ -14,9 +14,17 @@
 - When do we use `201 Created` vs `200 OK`?
 - Why is it important to return `404` instead of just an empty array or a generic error?
 - Answer: 
+- 
 - `201 Created` is used when resource is successfully created (POST), while `200 OK` is used for successful GET, PUT, or DELETE operations.
   
 - It is important t return `404` instead of an empty array or generic error is important because it provides clear, specific information to the client that the requested resource doesn't exist, following HTTP standards and making debugging easier.
 **4. Testing:**
 
 - ![alt text](image.png)
+
+
+o "Why did I choose to Embed the [Review/Tag/Log]?"
+- we embed when the data is small, stable, and inseparable from the record (like a tag or log), because there can be only one review for one dishes.
+
+o "Why did I choose to Reference the [Chef/User/Guest]?"
+- we reference when the data is large, shared, or frequently updated (like a chef or   user profile), because a dish can have a multiple chefs
