@@ -27,4 +27,4 @@ o "Why did I choose to Embed the [Review/Tag/Log]?"
 - we embed when the data is small, stable, and inseparable from the record (like a tag or log), because there can be only one review for one dishes.
 
 o "Why did I choose to Reference the [Chef/User/Guest]?"
-- we reference when the data is large, shared, or frequently updated (like a chef or   user profile), because a dish can have a multiple chefs
+- we reference when the data is large, shared, or frequently updated (like a chef or   user profile), because a dish can have a multiple chefsgit 

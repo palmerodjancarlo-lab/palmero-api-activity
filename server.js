@@ -3,6 +3,7 @@ require("dotenv").config();
 const express = require('express');
 const connectDB = require('./src/config/db');
 const apiRoutes = require('./src/Routes/apiRoutes');
+const authRoutes = require('./src/Routes/authRoutes');
 const app = express();
 connectDB();
 
@@ -13,6 +14,7 @@ app.use(express.urlencoded({ extended: true }));
 const PORT = process.env.PORT || 3000;
 const BASE_URI = process.env.BASE_URI || '/api/v1';
 
+app.use(process.env.BASE_URI, authRoutes);
 app.use(process.env.BASE_URI, apiRoutes);
 
 app.listen(PORT, () => {
