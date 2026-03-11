@@ -27,4 +27,26 @@ o "Why did I choose to Embed the [Review/Tag/Log]?"
 - we embed when the data is small, stable, and inseparable from the record (like a tag or log), because there can be only one review for one dishes.
 
 o "Why did I choose to Reference the [Chef/User/Guest]?"
-- we reference when the data is large, shared, or frequently updated (like a chef or   user profile), because a dish can have a multiple chefsgit 
+- we reference when the data is large, shared, or frequently updated (like a chef or   user profile), because a dish can have a multiple chefsgit
+
+**Securing API**
+
+**1. Authentication vs Authorization**
+Answer:
+Authentication is the process of verifying who you are. In our code, this happens in authController.js — when a user registers or logs in with their email and password, and receives a JWT token back.
+Authorization is the process of verifying what you are allowed to do. In our code, this is the authorize(...roles) middleware in authMiddleware.js — it checks if the logged-in user's role (e.g. 'admin', 'manager') is allowed to access a specific route.
+
+**2. Security (bcrypt)**
+Answer:
+We use bcryptjs instead of saving plain text passwords because if the database gets hacked, attackers would see only hashed passwords, not the real ones. In userModel.js, the pre('save') hook hashes the password before storing it, and matchPassword() safely compares the entered password against the hash without ever reversing it.
+
+**3. JWT Structure**
+Answer:
+When the protect middleware receives a JWT from the client, it:
+
+- Checks if the Authorization header exists and starts with 'Bearer'
+- Extracts the token from the header
+- Verifies the token using jwt.verify() and the JWT_SECRET
+- Decodes the user's id from the token and fetches the user from MongoDB (excluding the password)
+- Attaches the user to req.user so the next route/controller can access it
+- If anything fails, it returns a 401 Unauthorized error
